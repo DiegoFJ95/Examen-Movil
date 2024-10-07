@@ -1,10 +1,10 @@
-package com.example.kotlin.examenmovil.framework.viewmodel
+package com.example.kotlin.examenmovil.framework.adapters
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterBase
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterBase
 import com.example.kotlin.examenmovil.databinding.ItemCharacterBinding
 
 import com.example.kotlin.examenmovil.framework.viewholders.CharacterViewHolder
@@ -14,7 +14,7 @@ class CharacterAdapter: RecyclerView.Adapter<CharacterViewHolder>() {
     var data:ArrayList<CharacterBase> = ArrayList()
     lateinit var context: Context
 
-    fun CharacterAdapter(basicData : ArrayList<CharacterBase>,context:Context){
+    fun CharacterAdapter(basicData : ArrayList<CharacterBase>, context:Context){
         this.data = basicData
         this.context = context
     }

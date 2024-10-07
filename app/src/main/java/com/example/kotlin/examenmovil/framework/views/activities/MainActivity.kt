@@ -1,40 +1,44 @@
 package com.example.kotlin.examenmovil.framework.views.activities
 
-import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterObject
+import com.example.kotlin.examenmovil.R
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterObject
 import com.example.kotlin.examenmovil.databinding.ActivityMainBinding
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterBase
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterBase
 import com.example.kotlin.examenmovil.data.repositories.CharacterRepository
-import com.example.kotlin.examenmovil.framework.viewmodel.CharacterAdapter
+import com.example.kotlin.examenmovil.framework.adapters.CharacterAdapter
+import com.example.kotlin.examenmovil.framework.viewmodel.MainViewModel
 import com.example.kotlin.examenmovil.utils.Constants
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : Activity(){
+
+class MainActivity : AppCompatActivity(){
+
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
     private val adapter : CharacterAdapter = CharacterAdapter()
-//    private lateinit var data:ArrayList<CharacterBase>
-//
-//    private fun testData():ArrayList<CharacterBase>{
-//        var result = ArrayList<CharacterBase>()
-//
-////        result.add(CharacterBase("Goku",""))
-////        result.add(CharacterBase("Vegetta",""))
-////        result.add(CharacterBase("Krilin",""))
-//
-//        return result
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initializeBinding()
-        getCharacterList()
+        setUpFilterDropDown()
+//        getCharacterList()
+        initializeObservers()
+        setUpFilterButton()
+
+        viewModel.getCharacterList()
 
     }
 
@@ -56,17 +60,29 @@ class MainActivity : Activity(){
         rvcharacter.adapter = adapter
     }
 
-    private fun getCharacterList(){
-        CoroutineScope(Dispatchers.IO).launch {
-            val characterRepository = CharacterRepository()
-            val result: CharacterObject? = characterRepository.getCharacterList(Constants.PAGE)
-            CoroutineScope(Dispatchers.Main).launch {
-                setUpRecyclerView(result?.items!!)
-            }
 
+    private fun initializeObservers(){
+        viewModel.characterObjectLiveData.observe(this){ characterObject ->
+            setUpRecyclerView(characterObject.items)
         }
+    }
+
+    private fun setUpFilterDropDown(){
+        val filterDropdown = binding.DropDownAffi
+        val afiliations = resources.getStringArray(R.array.afiliations)
+        val arrayAdapter = ArrayAdapter(this, R.layout.drop_down_item, afiliations)
+        filterDropdown.setAdapter(arrayAdapter)
 
     }
 
+    private fun setUpFilterButton(){
+        val button = binding.BFiltro
+
+        button.setOnClickListener{
+            val string = binding.DropDownAffi.text.toString()
+            Log.d("Hola", string)
+            viewModel.affiliationFilter(string)
+        }
+    }
 
 }

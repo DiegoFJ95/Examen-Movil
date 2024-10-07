@@ -1,8 +1,8 @@
 package com.example.kotlin.examenmovil.data.network.character
 
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterObject
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterObject
 
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterBase
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterBase
 
 
 import retrofit2.http.GET
@@ -14,6 +14,7 @@ interface CharacterApiService {
     @GET("characters")
     suspend fun getCharacterList(
         @Query("page") page: Int,
+        @Query("limit") limit: Int,
     ): CharacterObject
 
 

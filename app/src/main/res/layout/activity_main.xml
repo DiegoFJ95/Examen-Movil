@@ -1,20 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/RVCharacter"
-        />
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+        <Button
+            android:id="@+id/BFiltro"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:backgroundTint="#f5cb42"
+            android:gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Filtrar"
+            />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/DropDownFrame"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:hint="Filtro por afiliación"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/DropDownAffi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RVCharacter"
+            />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>
-

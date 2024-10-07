@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ExamenMovil</string>
+
+    <string-array name="afiliations">
+        <item>Z Fighter</item>
+        <item>Freelancer</item>
+        <item>Army of Frieza</item>
+        <item>Villain</item>
+        <item>Pride Troopers</item>
+        <item>Other</item>
+    </string-array>
 </resources>

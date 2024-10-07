@@ -1,4 +1,4 @@
-package com.example.kotlin.examenmovil.data.models.dbz.classes
+package com.example.kotlin.examenmovil.data.network.models.dbz.classes
 
 data class Links(
     val first: String,

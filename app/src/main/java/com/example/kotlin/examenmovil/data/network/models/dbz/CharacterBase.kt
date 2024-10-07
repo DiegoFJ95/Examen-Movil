@@ -1,4 +1,4 @@
-package com.example.kotlin.examenmovil.data.models.dbz
+package com.example.kotlin.examenmovil.data.network.models.dbz
 
 import com.google.gson.annotations.SerializedName
 

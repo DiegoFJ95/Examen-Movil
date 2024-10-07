@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.kotlin.examenmovil.data.models.dbz.CharacterBase
+import com.example.kotlin.examenmovil.data.network.models.dbz.CharacterBase
 import com.example.kotlin.examenmovil.data.repositories.CharacterRepository
 import com.example.kotlin.examenmovil.databinding.ItemCharacterBinding
 import kotlinx.coroutines.CoroutineScope
@@ -18,12 +18,14 @@ import kotlinx.coroutines.launch
 
 class CharacterViewHolder(private val binding: ItemCharacterBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: CharacterBase ,context:Context){
-        binding.TVName.text = item.name
-        binding.TVAffiliation.text = item.affiliation
-        binding.TVGender.text = item.gender
-        binding.TVKi.text = item.ki
-        binding.TVRace.text = item.race
+    fun bind(item: CharacterBase, context:Context){
+        binding.TVName.text = "${item.name}"
+        binding.TVAffiliation.text = "Affiliation: ${item.affiliation}"
+        binding.TVGender.text = "Gender: ${item.gender}"
+        binding.TVKi.text = "Ki: ${item.ki}"
+        binding.MaxKi.text = "Max Ki: ${item.maxKi}"
+        binding.TVRace.text = "Race: ${item.race}"
+        binding.desc.text = "Description: ${item.description}"
 //        getCharacterInfo(item.image,binding.IVPhoto,context)
         CoroutineScope(Dispatchers.Main).launch {
 
